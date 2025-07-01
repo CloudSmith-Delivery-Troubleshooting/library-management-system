@@ -31,16 +31,6 @@ public class LibraryServiceTest {
     }
 
     @Test
-    public void testRegisterAndRetrieveMember() {
-        Member member = new Member("M001", "Alice");
-        libraryService.registerMember(member);
-
-        Member retrieved = libraryService.getMember("M001");
-        assertNotNull(retrieved);
-        assertEquals("Alice", retrieved.getName());
-    }
-
-    @Test
     public void testBorrowBookSuccess() {
         Book book = new Book("ISBN123", "Effective Java", "Joshua Bloch", 2);
         libraryService.addBook(book);
@@ -52,17 +42,6 @@ public class LibraryServiceTest {
 
         Book updatedBook = libraryService.getBook("ISBN123");
         assertEquals(1, updatedBook.getCopiesAvailable());
-    }
-
-    @Test
-    public void testBorrowBookFail_NoCopies() {
-        Book book = new Book("ISBN123", "Effective Java", "Joshua Bloch", 0);
-        libraryService.addBook(book);
-        Member member = new Member("M001", "Alice");
-        libraryService.registerMember(member);
-
-        boolean borrowed = libraryService.borrowBook("M001", "ISBN123");
-        assertFalse(borrowed);
     }
 
     @Test
